@@ -1,9 +1,7 @@
 package com.pluralsight.shop;
 
-public enum IceCreamSize {
-
-    //can use enum to set the prices to size instead of having to use a switch
-    CUTTIE_SIZE("Cutie Patootie size",5.50), JUST_RIGHT("Just right",7.00), SIDE_EYE("Side eye size",8.50);
+public enum DrinkSize {
+    MINI_CUP("mini cutie cup", 2.50), JUST_RIGHT("just right cup", 4.25), GRANDE("grande no ariana cup", 7.00);
     private final String displayName;
     private final double price;
 
@@ -15,11 +13,8 @@ public enum IceCreamSize {
         return price;
     }
 
-    IceCreamSize(String displayName, double price) {
+    DrinkSize(String displayName, double price) {
         this.displayName = displayName;
         this.price = price;
     }
 }
-
-
-
