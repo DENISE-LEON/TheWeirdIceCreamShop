@@ -10,6 +10,18 @@ public class SideItem extends MenuItem {
         this.description = description;
     }
 
+    public double getPricePerItem() {
+        return pricePerItem;
+    }
+
+    public void setPricePerItem(double pricePerItem) {
+        this.pricePerItem = pricePerItem;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String getDescription() {
         String desc = getName();
