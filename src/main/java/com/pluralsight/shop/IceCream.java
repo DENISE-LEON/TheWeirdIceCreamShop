@@ -3,15 +3,22 @@ package com.pluralsight.shop;
 import java.util.ArrayList;
 
 public abstract class IceCream extends MenuItem{
-    private ArrayList<Topping> toppings;
-    private boolean extraToppings;
-    private String iceDescription;
+    protected IceCreamSize iceCreamSize;
+    protected ArrayList<String> flavor;
+    protected ArrayList<Topping> toppings;
+    protected String iceDescription;
 
-    public IceCream(String name, ArrayList<Topping> toppings, boolean extraToppings, String iceDescription) {
+
+
+    public IceCream(String name, IceCreamSize iceCreamSize) {
         super(name);
-        this.toppings = toppings;
-        this.extraToppings = extraToppings;
-        this.iceDescription = iceDescription;
+        this.iceCreamSize = iceCreamSize;
+        this.flavor = new ArrayList<>();
+        this.toppings = new ArrayList<>();
+    }
+
+    public IceCreamSize getIceCreamSize() {
+        return iceCreamSize;
     }
 
     public ArrayList<Topping> getToppings() {
@@ -22,13 +29,6 @@ public abstract class IceCream extends MenuItem{
         this.toppings = toppings;
     }
 
-    public boolean isExtraToppings() {
-        return extraToppings;
-    }
-
-    public void setExtraToppings(boolean extraToppings) {
-        this.extraToppings = extraToppings;
-    }
 
     public String getIceDescription() {
         return iceDescription;
