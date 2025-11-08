@@ -2,12 +2,22 @@ package com.pluralsight.shop;
 
 public class SideItem extends MenuItem {
     private double pricePerItem;
+    private int quantity;
     private  String description;
 
+    //template
     public SideItem(String name, double pricePerItem, String description) {
         super(name);
         this.pricePerItem = pricePerItem;
         this.description = description;
+    }
+
+    //for ordering purposes
+    public SideItem(SideItem template) {
+        super(template.getName());
+        this.pricePerItem = template.pricePerItem;
+        this.quantity = 1;
+
     }
 
     public double getPricePerItem() {
@@ -22,15 +32,24 @@ public class SideItem extends MenuItem {
         this.description = description;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String getDescription() {
-        String desc = getName();
+        String desc = getName() + getQuantity() + getPricePerItem();
 
         return desc;
     }
 
+    //calculates the price
     @Override
     public double totalPrice() {
-        return pricePerItem;
+        return pricePerItem * quantity;
     }
 }

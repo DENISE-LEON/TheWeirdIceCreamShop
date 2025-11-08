@@ -7,13 +7,23 @@ public class Drink extends MenuItem {
     private boolean extraSugar;
     private String drinkDescription;
 
-    public Drink(String name, DrinkSize drinkSize, String type, boolean extraIce, boolean extraSugar, String drinkDescription) {
+    //template for creating the
+    public Drink(String name, String type, boolean extraIce, boolean extraSugar, String drinkDescription) {
         super(name);
-        this.drinkSize = drinkSize;
         this.type = type;
         this.extraIce = extraIce;
         this.extraSugar = extraSugar;
         this.drinkDescription = drinkDescription;
+    }
+
+    //the constructor called when creating a drink when the user places an order
+    //copies from the template
+    public Drink(Drink template, DrinkSize drinkSize) {
+        super(template.getName());
+        this.type = template.type;
+        this.extraIce= template.extraIce;
+        this.extraSugar = template.extraSugar;
+        this.drinkSize = drinkSize;
     }
 
     public DrinkSize getDrinkSize() {
