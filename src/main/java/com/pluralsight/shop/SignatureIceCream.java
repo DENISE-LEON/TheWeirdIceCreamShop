@@ -1,18 +1,16 @@
 package com.pluralsight.shop;
 
+import java.util.ArrayList;
+
 public class SignatureIceCream extends IceCream {
 
 
-    public SignatureIceCream(String iceCreamName, IceCreamSize iceCreamSize) {
-        super(iceCreamName, iceCreamSize);
-        switch (iceCreamName) {
-            case "The Picolas Cage":
-                flavor.add("pickle");
-                flavor.add("chocolate");
-                flavor.add("mint");
-               iceCreamSize = IceCreamSize.SIDE_EYE;
+    //template constructor
 
-        }
-
+    //template
+    public SignatureIceCream(String name, IceCreamSize iceCreamSize, ArrayList<String> flavor, ArrayList<Topping> toppings, String iceDescription) {
+        super(name, iceCreamSize, flavor, toppings, iceDescription);
     }
+
+    //order constructor
 }
