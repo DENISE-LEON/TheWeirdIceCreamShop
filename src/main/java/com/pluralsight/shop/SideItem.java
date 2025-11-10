@@ -13,7 +13,7 @@ public class SideItem extends MenuItem {
     }
 
     //for ordering purposes
-    public SideItem(SideItem template) {
+    public SideItem(SideItem template, int quantity) {
         super(template.getName());
         this.pricePerItem = template.pricePerItem;
         this.quantity = 1;

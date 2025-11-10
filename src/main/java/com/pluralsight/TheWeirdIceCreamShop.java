@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import com.pluralsight.shop.IceCream;
 import com.pluralsight.userInterface.UserInterface;
 
 public class TheWeirdIceCreamShop {
@@ -8,5 +9,6 @@ public class TheWeirdIceCreamShop {
 
         userInterface.welcomeMessage();
         userInterface.displayMenu();
+       // IceCream iceCream = new IceCream("p", )
     }
 }
