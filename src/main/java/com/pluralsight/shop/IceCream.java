@@ -71,9 +71,10 @@ public class IceCream extends MenuItem {
         return iceCreamSize + getName() + flavors + toppings;
     }
 
-    //abstract method to calculate the price
+    //method to calculate the price
     public double totalPrice() {
-        return iceCreamSize.getPrice(); //add in the toppings to calculate price
+        int amt = 0;
+        return totalPriceForSize() +  extraToppingCalc(amt); //add in the toppings to calculate price
         //add topping total prie
     }
 
@@ -92,7 +93,18 @@ public class IceCream extends MenuItem {
         }
     }
 
-    public double totalPriceForAmt(int amt) {
+    public double extraToppingCalc(int amt) {
+        double price;
+        switch (size) {
+            case CUTTIE_SIZE:
+                return amt * .25;
+            case JUST_RIGHT:
+                return amt * .50;
+            case SIDE_EYE:
+                return  amt * .75;
+            default:
+                throw new IllegalArgumentException("Unknown size");
+        }
 
     }
 
