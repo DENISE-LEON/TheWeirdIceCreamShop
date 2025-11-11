@@ -25,9 +25,10 @@ public class IceCream extends MenuItem {
 
     //order constructor
     //does not have a description
-    public IceCream(IceCream template, IceCreamSize iceCreamSize) {
+    public IceCream(IceCream template, IceCreamSize iceCreamSize, int extraToppings) {
         super(template.getName());
         this.iceCreamCup = template.iceCreamCup;
+        this.extraToppings = extraToppings;
         this.flavors = new ArrayList<>(template.flavors); //copies the flavors from template
         this.toppings = new ArrayList<>(template.toppings); //copies the toppings for template
         this.iceCreamSize = iceCreamSize;
@@ -40,12 +41,14 @@ public class IceCream extends MenuItem {
         this.flavors = new ArrayList<>(flavors);
     }
 
-    public IceCream(IceCream template, IceCreamCup iceCreamCup, ArrayList<Topping> toppings, IceCreamSize iceCreamSize) {
+    public IceCream(IceCream template, IceCreamCup iceCreamCup,IceCreamSize iceCreamSize, ArrayList<Topping> toppings, int extraToppings) {
         super(template.getName());
         this.iceCreamCup = iceCreamCup;
+        this.iceCreamSize = iceCreamSize;
         this.flavors = new ArrayList<>(template.flavors);
         this.toppings = new ArrayList<>(toppings);
-        this.iceCreamSize = iceCreamSize;
+        this.extraToppings = extraToppings;
+
     }
 
     public IceCreamSize getIceCreamSize() {
