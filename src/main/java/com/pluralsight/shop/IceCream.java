@@ -3,20 +3,21 @@ package com.pluralsight.shop;
 import java.util.ArrayList;
 
 public class IceCream extends MenuItem {
-    protected IceCreamSize iceCreamSize;
+    private IceCreamSize iceCreamSize;
     //list of flavors and toppings for each order
-    protected ArrayList<String> flavors;
+    private IceCreamCup iceCreamCup;
+    private ArrayList<String> flavors;
     //list of flavors and toppings for each order
-    protected ArrayList<Topping> toppings;
+    private ArrayList<Topping> toppings;
     private int extraToppings;
-    protected String iceDescription;
-    Topping topping;
-    IceCreamSize size;
+    private String iceDescription;
+
 
     //SIGNATURE CONSTRUCTORS
     //template for signature ice cream:does not have preset size
-    public IceCream(String name, ArrayList<String> flavors, ArrayList<Topping> toppings, String iceDescription) {
+    public IceCream(String name, IceCreamCup iceCreamCup, ArrayList<String> flavors, ArrayList<Topping> toppings, String iceDescription) {
         super(name);
+        this.iceCreamCup = iceCreamCup;
         this.flavors = new ArrayList<>(flavors);
         this.toppings = new ArrayList<>(toppings);
         this.iceDescription = iceDescription;
@@ -26,23 +27,25 @@ public class IceCream extends MenuItem {
     //does not have a description
     public IceCream(IceCream template, IceCreamSize iceCreamSize) {
         super(template.getName());
-        this.flavors = new ArrayList<>(flavors);
-        this.toppings = new ArrayList<>(toppings);
+        this.iceCreamCup = template.iceCreamCup;
+        this.flavors = new ArrayList<>(template.flavors); //copies the flavors from template
+        this.toppings = new ArrayList<>(template.toppings); //copies the toppings for template
         this.iceCreamSize = iceCreamSize;
     }
 
     //REGULAR ICE CREAM CONSTRUCORS
     //template
-
     public IceCream(String name, ArrayList<String> flavors) {
         super(name);
         this.flavors = new ArrayList<>(flavors);
     }
 
-    public IceCream(IceCream template, ArrayList<Topping> toppings, IceCreamSize iceCreamSize) {
+    public IceCream(IceCream template, IceCreamCup iceCreamCup, ArrayList<Topping> toppings, IceCreamSize iceCreamSize) {
         super(template.getName());
+        this.iceCreamCup = iceCreamCup;
         this.flavors = new ArrayList<>(template.flavors);
-        this.toppings = new ArrayList<>(template.toppings);
+        this.toppings = new ArrayList<>(toppings);
+        this.iceCreamSize = iceCreamSize;
     }
 
     public IceCreamSize getIceCreamSize() {
@@ -72,15 +75,25 @@ public class IceCream extends MenuItem {
     }
 
     //method to calculate the price
+    //adds toppings, cup type, size
     public double totalPrice() {
-        int amt = 0;
-        return totalPriceForSize() +  extraToppingCalc(amt); //add in the toppings to calculate price
+        // int amt = 0;
+        return toppings.stream()
+                .mapToDouble(t -> toppingPriceForSize(t))
+                .sum()
+                + extraToppingCalc(extraToppings)
+                + iceCreamSize.getPrice()
+                + iceCreamCup.getPrice();
         //add topping total prie
+
+        //create a loop to loop through list of toppings and get the total for all of them
     }
 
-    public double totalPriceForSize() {
-        double price = topping.totalPrice();
-        switch (size) {
+    //topping total based on size
+    public double toppingPriceForSize(Topping t) {
+        //gets the price of topping from the topping type enum class
+        double price = t.totalPrice();
+        switch (iceCreamSize) {
             case CUTTIE_SIZE:
                 return price;
             case JUST_RIGHT:
@@ -91,22 +104,25 @@ public class IceCream extends MenuItem {
                 //must throw an exception in case size is null
                 throw new IllegalArgumentException("Unknown size");
         }
+
     }
 
-    public double extraToppingCalc(int amt) {
+    //multiplies the cost for each extra topping based on the size and amount
+    public double extraToppingCalc(int extraToppings) {
         double price;
-        switch (size) {
+        switch (iceCreamSize) {
             case CUTTIE_SIZE:
-                return amt * .25;
+                return extraToppings * .25;
             case JUST_RIGHT:
-                return amt * .50;
+                return extraToppings * .50;
             case SIDE_EYE:
-                return  amt * .75;
+                return extraToppings * .75;
             default:
                 throw new IllegalArgumentException("Unknown size");
         }
-
     }
+
+    //method to cal
 
 
 }

@@ -23,6 +23,10 @@ public class UserInterface {
                 0) Exit
                 """);
         int menuChoice = scanner.nextInt();
+
     }
+
+
+    //method for placing order
 
 }
