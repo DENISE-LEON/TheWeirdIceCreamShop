@@ -35,12 +35,17 @@ public class IceCream extends MenuItem {
     }
 
     //REGULAR ICE CREAM CONSTRUCORS
-    //template
-//    public IceCream(String name, ArrayList<String> flavors) {
-//        super(name);
-//        this.flavors = new ArrayList<>(flavors);
-//    }
+    //ice cream base
 
+    public IceCream(IceCreamSize iceCreamSize, IceCreamCup iceCreamCup) {
+        super("new ice cream");
+        this.iceCreamSize = iceCreamSize;
+        this.iceCreamCup = iceCreamCup;
+        this.flavors = new ArrayList<>();
+        this.toppings = new ArrayList<>();
+    }
+
+    //remove flavors anfd toppings
     public IceCream(IceCream template, IceCreamCup iceCreamCup,IceCreamSize iceCreamSize, ArrayList<Topping> toppings, int extraToppings) {
         super(template.getName());
         this.iceCreamCup = iceCreamCup;
@@ -48,7 +53,6 @@ public class IceCream extends MenuItem {
         this.flavors = new ArrayList<>(template.flavors);
         this.toppings = new ArrayList<>(toppings);
         this.extraToppings = extraToppings;
-
     }
 
     public IceCreamSize getIceCreamSize() {
@@ -61,6 +65,9 @@ public class IceCream extends MenuItem {
 
     public ArrayList<String> getFlavors() {
         return flavors;
+    }
+    public void setFlavors(ArrayList<String> flavors){
+        this.flavors = flavors;
     }
 
     public void setToppings(ArrayList<Topping> toppings) {

@@ -19,6 +19,9 @@ public class IceCreamShop {
     public String getAddress() {
         return address;
     }
+    public ArrayList<String> getFlavorMenu(){
+        return this.flavorMenu;
+    }
 
     public IceCreamShop() {
 
@@ -45,18 +48,27 @@ public class IceCreamShop {
         flavorMenu.add("Hot Cheeto");
 
         //signature ice creams
-        signatureTemplate.add(new IceCream("Piccolas Cage", IceCreamCup.EDIBLE_GLASS, ))
+       // signatureTemplate.add(new IceCream("Piccolas Cage", IceCreamCup.EDIBLE_GLASS, ))
 
     }
 
     //method to add flavors by name
-    //MOVE METHOD TO ICE CREAM CLASS!!!!!!!
-    public void addFlavorByName(String name, ArrayList<String> flavorMenu, IceCream iceCream) { //passing list to make moving method easier later
-        flavorMenu.stream()
-                .filter(f -> f.equalsIgnoreCase(name)) //only filters the stream (good for displaying purposes)
-                .findFirst() //extracts the first element that matches so that it could be used in the next chain, to add the flavor
-                .ifPresent(iceCream.getFlavors() ::add); //what i want to do with the extracted flavor (add it to the array;ist)
+    //MOVE METHOD TO UTIL or UI!!!!!!!
+    public void addFlavorByName(ArrayList<String> names, IceCream iceCream) {
 
+        for(String name: names) {//passing list to make moving method easier later
+            flavorMenu.stream()
+                    .filter(f -> f.equalsIgnoreCase(name)) //only filters the stream (good for displaying purposes)
+                    .findFirst() //extracts the first element that matches so that it could be used in the next chain, to add the flavor
+                    .ifPresent(iceCream.getFlavors()::add);
+        }//what i want to do with the extracted flavor (add it to the array;ist)
+    }
+
+    //display available flavors
+    public void flavorMenuDisplay() {
+        System.out.println(" ");
+        flavorMenu.stream()
+                .forEach(System.out::println);
     }
 }
 

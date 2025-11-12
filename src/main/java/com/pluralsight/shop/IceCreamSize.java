@@ -3,7 +3,7 @@ package com.pluralsight.shop;
 public enum IceCreamSize {
 
     //can use enum to set the prices to size instead of having to use a switch
-    CUTTIE_SIZE("Cutie Patootie Size",5.50, 1), JUST_RIGHT("Just Right",7.00, 2), SIDE_EYE("Side Eye Size",8.50, 3);
+    CUTTIE_SIZE("Cutie Patootie Size",5.50, 1), JUST_RIGHT("Just Right Size",7.00, 2), SIDE_EYE("Side Eye Size",8.50, 3);
     private final String displayName;
     private final double price;
     private final int amtOfScoops;
@@ -33,6 +33,17 @@ public enum IceCreamSize {
         for(IceCreamSize size: IceCreamSize.values()) {
         System.out.printf("%d)  %-30s $%.2f%n", i++, size.getDisplayName(), size.getPrice());
         }
+    }
+
+    //method to turn to index
+    public static IceCreamSize toIndex(int index) {
+        IceCreamSize[] sizes = IceCreamSize.values(); //creates a list of the sizes that contains the values of each cup
+        //incase index is negative or greater than list of cups
+        if (index < 1 || index > sizes.length) {
+            //incase of bad input
+            throw new IllegalArgumentException("Invalid cup selection");
+        }
+        return sizes[index -1];
     }
 }
 
