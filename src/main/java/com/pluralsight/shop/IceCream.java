@@ -36,10 +36,10 @@ public class IceCream extends MenuItem {
 
     //REGULAR ICE CREAM CONSTRUCORS
     //template
-    public IceCream(String name, ArrayList<String> flavors) {
-        super(name);
-        this.flavors = new ArrayList<>(flavors);
-    }
+//    public IceCream(String name, ArrayList<String> flavors) {
+//        super(name);
+//        this.flavors = new ArrayList<>(flavors);
+//    }
 
     public IceCream(IceCream template, IceCreamCup iceCreamCup,IceCreamSize iceCreamSize, ArrayList<Topping> toppings, int extraToppings) {
         super(template.getName());
