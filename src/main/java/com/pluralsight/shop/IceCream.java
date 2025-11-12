@@ -59,6 +59,10 @@ public class IceCream extends MenuItem {
         return toppings;
     }
 
+    public ArrayList<String> getFlavors() {
+        return flavors;
+    }
+
     public void setToppings(ArrayList<Topping> toppings) {
         this.toppings = toppings;
     }

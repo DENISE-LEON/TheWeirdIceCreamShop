@@ -7,8 +7,9 @@ public class IceCreamShop {
     private final String address = "55-555 Eboard St";
     // ArrayList<Drink> drinkTemplates = new ArrayList<>();
     ArrayList<SideItem> sideItemTemplate = new ArrayList<>();
-    // ArrayList<IceCream> flavorTemplate = new ArrayList<>();
+    ArrayList<IceCream> signatureTemplate = new ArrayList<>();
     ArrayList<String> flavorMenu = new ArrayList<>();
+
 
 
     public String getName() {
@@ -43,6 +44,18 @@ public class IceCreamShop {
         flavorMenu.add("Pickle Pickle");
         flavorMenu.add("Hot Cheeto");
 
+        //signature ice creams
+        signatureTemplate.add(new IceCream("Piccolas Cage", IceCreamCup.EDIBLE_GLASS, ))
+
+    }
+
+    //method to add flavors by name
+    //MOVE METHOD TO ICE CREAM CLASS!!!!!!!
+    public void addFlavorByName(String name, ArrayList<String> flavorMenu, IceCream iceCream) { //passing list to make moving method easier later
+        flavorMenu.stream()
+                .filter(f -> f.equalsIgnoreCase(name)) //only filters the stream (good for displaying purposes)
+                .findFirst() //extracts the first element that matches so that it could be used in the next chain, to add the flavor
+                .ifPresent(iceCream.getFlavors() ::add); //what i want to do with the extracted flavor (add it to the array;ist)
 
     }
 }
