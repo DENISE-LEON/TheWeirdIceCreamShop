@@ -4,7 +4,13 @@ import java.util.ArrayList;
 
 public class Topping extends MenuItem {
     private ToppingType toppingType;
-    ArrayList<Topping> toppings;
+   //ArrayList<Topping> toppings;
+
+    //constructor
+       public Topping(String name, ToppingType toppingType) {
+        super(name);
+        this.toppingType = toppingType;
+    }
 
     public ToppingType getToppingType() {
         return toppingType;
@@ -14,10 +20,7 @@ public class Topping extends MenuItem {
         this.toppingType = toppingType;
     }
 
-    public Topping(String name, ToppingType toppingType) {
-        super(name);
-        this.toppingType = toppingType;
-    }
+
 
     @Override
     public String getDescription() {
@@ -33,9 +36,9 @@ public class Topping extends MenuItem {
 
     }
 
-    public void addToppings(Topping topping) {
-        toppings.add(topping);
-    }
+//    public void addToppings(Topping topping) {
+//        toppings.add(topping);
+//    }
 
 
 }

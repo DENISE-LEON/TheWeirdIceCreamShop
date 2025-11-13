@@ -4,9 +4,7 @@ public enum ToppingType {
     MYSTICAL("mystical mystery topping", 2.00, true),
     WEIRD("that doesn't belong on ice cream topping", 1.00, true),
     FRUIT("fruity toppings", 0.75, true),
-    NUT("nut toppings", 0.00, false),
     CANDY("candy toppings", 0.00, false),
-    CAKE("cake toppings", 1.00, true),
     DRIZZLE("drizzle toppings", 0.00, false);
 
     private final String displayName;

@@ -1,6 +1,7 @@
 package com.pluralsight.shop;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class IceCreamShop {
     private final String name = "The Weird Ice Cream Shop";
@@ -9,6 +10,7 @@ public class IceCreamShop {
     ArrayList<SideItem> sideItemTemplate = new ArrayList<>();
     ArrayList<IceCream> signatureTemplate = new ArrayList<>();
     ArrayList<String> flavorMenu = new ArrayList<>();
+    ArrayList<Topping> toppingMenu = new ArrayList<>();
 
 
 
@@ -47,8 +49,49 @@ public class IceCreamShop {
         flavorMenu.add("Pickle Pickle");
         flavorMenu.add("Hot Cheeto");
 
+
+        //topping menu
+        //Mystical
+        toppingMenu.add(new Topping("Stardust Sprinkles", ToppingType.MYSTICAL));
+        toppingMenu.add(new Topping("Moon Crystal Shards", ToppingType.MYSTICAL));
+        toppingMenu.add(new Topping("Moon Cheese", ToppingType.MYSTICAL));
+        toppingMenu.add(new Topping("Baked Founder Titan Pieces", ToppingType.MYSTICAL));
+        toppingMenu.add(new Topping("Wizard Bones",ToppingType.MYSTICAL));
+
+        //Weird
+        toppingMenu.add(new Topping("Pickle Confetti", ToppingType.WEIRD));
+        toppingMenu.add(new Topping("Hot Cheeto Dust", ToppingType.WEIRD));
+        toppingMenu.add(new Topping("Wasabi Crunch", ToppingType.WEIRD));
+        toppingMenu.add(new Topping("Marshmallow Mushrooms", ToppingType.WEIRD));
+
+        //Fruit
+        toppingMenu.add(new Topping("Raspberry Burst", ToppingType.FRUIT));
+        toppingMenu.add(new Topping("Mango Cubes", ToppingType.FRUIT));
+        toppingMenu.add(new Topping("Blueberry Gems", ToppingType.FRUIT));
+        toppingMenu.add(new Topping("Pineapple Bits", ToppingType.FRUIT));
+
+        //Candy
+        toppingMenu.add(new Topping("Mini Gummy Bears", ToppingType.CANDY));
+        toppingMenu.add(new Topping("Cotton Candy Floss", ToppingType.CANDY));
+        toppingMenu.add(new Topping("Choco Rocks", ToppingType.CANDY));
+        toppingMenu.add(new Topping("Caramel Pearls", ToppingType.CANDY));
+
+        //Drizzle
+        toppingMenu.add(new Topping("Dark Chocolate Drizzle", ToppingType.DRIZZLE));
+        toppingMenu.add(new Topping("Raspberry Syrup", ToppingType.DRIZZLE));
+        toppingMenu.add(new Topping("Salted Caramel Swirl", ToppingType.DRIZZLE));
+        toppingMenu.add(new Topping("Honey Glaze", ToppingType.DRIZZLE));
+
+
+
+
+
+
+
         //signature ice creams
        // signatureTemplate.add(new IceCream("Piccolas Cage", IceCreamCup.EDIBLE_GLASS, ))
+
+
 
     }
 
@@ -67,8 +110,14 @@ public class IceCreamShop {
     //display available flavors
     public void flavorMenuDisplay() {
         System.out.println(" ");
-        flavorMenu.stream()
-                .forEach(System.out::println);
+        IntStream.range(0, flavorMenu.size())
+                .forEach(i -> System.out.println((i + 1) + ")" + flavorMenu.get(i)));
+    }
+
+
+    public void toppingMenuDisplay() {
+        System.out.println(" ");
+
     }
 }
 

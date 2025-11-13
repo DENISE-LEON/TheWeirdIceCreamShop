@@ -68,9 +68,9 @@ public class UserInterface {
 
         //display the flavors
 
-        boolean choseFlavors = false;
+        boolean validFlavors = false;
    ArrayList selectedFlavors = new ArrayList<>();
-        while (!choseFlavors) {
+        while (!validFlavors) {
 
 
             //add the flavor to the ice cream
@@ -81,10 +81,8 @@ public class UserInterface {
 
             //displaying the flavors to the user to choose from
             ArrayList<String> flavors = weirdIceCreamShop.getFlavorMenu();
-            System.out.println(iceCream.getFlavors());
-            for (int i = 0; i < flavors.size(); i++) {
-                System.out.println(i + 1 + ") " + flavors.get(i));
-            }
+
+           weirdIceCreamShop.flavorMenuDisplay();
 
             System.out.println("""
                     
@@ -113,28 +111,26 @@ public class UserInterface {
             }
                    //all flavors have been added to selected flavors arr.
                 iceCream.setFlavors(selectedFlavors);
-                choseFlavors = true;
-
+                validFlavors = true;
             }
-
         }
 
-
-      //  weirdIceCreamShop.addFlavorByName(selectedFlavors, iceCream);
-
-        // insert loop that asks if user wants to add more flavors until limit is reached
-        //use if that notifies the user that they have reached limit
-        //asks if they would like to replace one of the flavors with another
-        //maybe use list with fixed # of elements
-        //use if they dont want to add any other flavors, set all scops to one flavor selected (if use the preset list)
 
         System.out.println("""
         
         Choosen Flavors: 
         
         """ + iceCream.getFlavors());
+
+        //add toppings
         System.out.println("time to accessorize your ice cream with yummy topping");
 
+        ArrayList<Topping> selectedToppings = new ArrayList<>();
+        boolean validToppings = true;
+        do {
+
+
+        } while
 
         }
 
