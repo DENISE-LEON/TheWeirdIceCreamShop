@@ -217,18 +217,46 @@ public class UserInterface {
             int extra = scanner.nextInt();
             scanner.nextLine();
 
-            IceCream ordered = new IceCream(template, size, extra);
+            IceCream sigIceCream = new IceCream(template, size, extra);
 
-            System.out.println("Your signature order: " + ordered.getName());
-            System.out.println("Total: $" + ordered.totalPrice());
+            System.out.println("Your signature order: " + sigIceCream.getDescription());
+            System.out.println("Total: $" + sigIceCream.totalPrice());
 
             // insert buffered writer
+            //prompt user if want to check out, edit order, or purchse another item, or exit
+
         } while (!validChoice);
+
+        //insert order summary
+
     }
 
 
     public void drinkOrderProcess() {
+        ArrayList<Drink> drinks = weirdIceCreamShop.getDrinkTemplate();
+       weirdIceCreamShop.drinkMenuDisplay();
+        System.out.println("Please choose a drink");
+        int choice = scanner.nextInt();
+        scanner.nextLine();
 
+        if (choice < 1 || choice > drinks.size()) {
+            System.out.println("Invalid choice.");
+            return;
+        }
+
+        Drink template = drinks.get(choice - 1);
+
+        System.out.println("Choose a size:");
+        DrinkSize.displaySizeOptions();
+
+        int drinkSize = scanner.nextInt();
+        DrinkSize sizeChoice = DrinkSize.toIndex(drinkSize);
+
+        Drink drink = new Drink(template, sizeChoice);
+        System.out.println("Drink ordered: " + drink.getDescription());
+        System.out.println("Total: $" + drink.totalPrice());
+
+        //nsert buffered writer
     }
 
     public void sideOrderProcess() {

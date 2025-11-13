@@ -5,8 +5,8 @@ import java.util.stream.IntStream;
 
 public class IceCreamShop {
     private final String name = "The Weird Ice Cream Shop";
-    private final String address = "55-555 Eboard St";
-    // ArrayList<Drink> drinkTemplates = new ArrayList<>();
+    private final String address = "55-555 Mystic St";
+    ArrayList<Drink> drinkTemplate = new ArrayList<>();
     ArrayList<SideItem> sideItemTemplate = new ArrayList<>();
     ArrayList<IceCream> signatureTemplate = new ArrayList<>();
     ArrayList<String> flavorMenu = new ArrayList<>();
@@ -31,6 +31,14 @@ public class IceCreamShop {
 
     public ArrayList<IceCream> getSignatureTemplate() {
         return this.signatureTemplate;
+    }
+
+    public ArrayList<Drink> getDrinkTemplate() {
+        return this.drinkTemplate;
+    }
+
+    public ArrayList<SideItem> getSideItemTemplate() {
+        return this.sideItemTemplate;
     }
 
     public IceCreamShop() {
@@ -108,6 +116,12 @@ public class IceCreamShop {
                 new ArrayList<>(java.util.List.of(findTopping("Mango Cubes"), findTopping("Honey Glaze"))), "Tropical with a spellbinding sour kick"));
 
 
+        //drinks
+        drinkTemplate.add(new Drink("Minty Madness","Mint chocolate chip milkshake",false,true,"Refreshingly chaotic, topped with extra sugar"));
+        drinkTemplate.add(new Drink("Yuzu Pop","Sparkling citrus soda",false,false,"Bright, zesty, absolutely unserious"));
+        drinkTemplate.add(new Drink("Dark Roast Disaster","Cold brew with caramel drizzle",false,false,"Aggressively caffeinated for finals week vibes"));
+
+
     }
 
 
@@ -148,7 +162,18 @@ public class IceCreamShop {
                 .forEach(i -> System.out.println((i + 1) + ")" + " " + signatureTemplate.get(i).getName()));
     }
 
+    public void drinkMenuDisplay() {
+        System.out.println(" ");
+        IntStream.range(0, drinkTemplate.size())
+                .forEach(i -> System.out.println((i + 1) + ")" + " " + drinkTemplate.get(i).getName()));
+    }
 
+
+    public void sideItemMenuDisplay() {
+        System.out.println(" ");
+        IntStream.range(0, sideItemTemplate.size())
+                .forEach(i -> System.out.println((i + 1) + ")" + " " + sideItemTemplate.get(i).getName()));
+    }
 }
 
 //turn the drink template into a hash map in order to easily search by name
