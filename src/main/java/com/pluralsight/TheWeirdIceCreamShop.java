@@ -11,6 +11,6 @@ public class TheWeirdIceCreamShop {
 
         //tests
        // IceCream iceCream = new IceCream("p", )
-        userInterface.iceCreamOrderProcess();
+        //userInterface.iceCreamOrderProcess();
     }
 }

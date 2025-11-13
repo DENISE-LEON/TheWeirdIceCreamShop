@@ -48,6 +48,9 @@ public class UserInterface {
                 2) Order a signature ice creams
                 3) Order a drink
                 4) Order side items
+                5) Checkout
+                6) View order summary
+                0) Cancel Order
                 """);
 
         int choice = scanner.nextInt();
@@ -213,6 +216,9 @@ public class UserInterface {
 
             //prompt user if want to order as is or change order
 
+            //remove toppings
+
+            //adds toppings
             System.out.println("How many extra toppings?");
             int extra = scanner.nextInt();
             scanner.nextLine();
@@ -233,6 +239,7 @@ public class UserInterface {
 
 
     public void drinkOrderProcess() {
+
         ArrayList<Drink> drinks = weirdIceCreamShop.getDrinkTemplate();
        weirdIceCreamShop.drinkMenuDisplay();
         System.out.println("Please choose a drink");
@@ -241,7 +248,7 @@ public class UserInterface {
 
         if (choice < 1 || choice > drinks.size()) {
             System.out.println("Invalid choice.");
-            return;
+
         }
 
         Drink template = drinks.get(choice - 1);
@@ -260,8 +267,47 @@ public class UserInterface {
     }
 
     public void sideOrderProcess() {
+        //creates a temp copy of the items in the menu list
+        ArrayList<SideItem> sides = weirdIceCreamShop.getSideItemTemplate();
+
+        //calls the display method in the weird ice cream shop
+        weirdIceCreamShop.sideItemMenuDisplay();
+        System.out.println("What would you like?");
+        int sideChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (sideChoice < 1 || sideChoice > sides.size()) {
+            System.out.println("Invalid choice");
+
+        }
+
+        SideItem template = sides.get(sideChoice - 1);
+
+        System.out.println("How many would you like?");
+        int qty = scanner.nextInt();
+        scanner.nextLine();
+
+
+        SideItem side = new SideItem(template, qty);
+        side.setQuantity(qty);
+
+        System.out.println(side.getDescription());
+        //insert buffered reader
+    }
+
+    public void checkOutProcess() {
 
     }
+
+    public void viewOrderProcess() {
+        //shows order
+        //option to add to order checkout
+        //option to edit order
+        //option to check out
+        //option to
+    }
+
+
 
 
 }
