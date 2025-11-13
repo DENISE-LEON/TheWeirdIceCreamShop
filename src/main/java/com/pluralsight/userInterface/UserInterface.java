@@ -26,6 +26,16 @@ public class UserInterface {
                 """);
         int menuChoice = scanner.nextInt();
 
+        switch (menuChoice) {
+            case 1:
+                orderProcess();
+                break;
+            case 0:
+                System.out.println("Bye bye");
+                System.exit(0);
+                //add a default
+        }
+
     }
 
 
@@ -45,6 +55,17 @@ public class UserInterface {
         switch (choice) {
             case 1:
                 iceCreamOrderProcess();
+                break;
+            case 2:
+                signatureOrderProcess();
+                break;
+            case 3:
+                drinkOrderProcess();
+                break;
+            case 4:
+                sideOrderProcess();
+                break;
+            //add a defualt
 
         }
     }
@@ -69,7 +90,7 @@ public class UserInterface {
         //display the flavors
 
         boolean validFlavors = false;
-   ArrayList selectedFlavors = new ArrayList<>();
+        ArrayList selectedFlavors = new ArrayList<>();
         while (!validFlavors) {
 
 
@@ -82,7 +103,7 @@ public class UserInterface {
             //displaying the flavors to the user to choose from
             ArrayList<String> flavors = weirdIceCreamShop.getFlavorMenu();
 
-           weirdIceCreamShop.flavorMenuDisplay();
+            weirdIceCreamShop.flavorMenuDisplay();
 
             System.out.println("""
                     
@@ -101,15 +122,15 @@ public class UserInterface {
             } else {
                 // if the length is valid
                 //then we want to make sure the flavors are valid
-                   for (String flavIndex : choices) {
-                int index = Integer.parseInt(flavIndex)-1;
-                if(index>flavors.size()-1 || index<0){
-                    System.out.println("Sorry invalid flavor choice");
-                } else {
-                    selectedFlavors.add(flavors.get(index));
+                for (String flavIndex : choices) {
+                    int index = Integer.parseInt(flavIndex) - 1;
+                    if (index > flavors.size() - 1 || index < 0) {
+                        System.out.println("Sorry invalid flavor choice");
+                    } else {
+                        selectedFlavors.add(flavors.get(index));
+                    }
                 }
-            }
-                   //all flavors have been added to selected flavors arr.
+                //all flavors have been added to selected flavors arr.
                 iceCream.setFlavors(selectedFlavors);
                 validFlavors = true;
             }
@@ -117,10 +138,10 @@ public class UserInterface {
 
 
         System.out.println("""
-        
-        Chosen Flavors: 
-        
-        """ + iceCream.getFlavors());
+                
+                Chosen Flavors:
+                
+                """ + iceCream.getFlavors());
 
         //add toppings
         System.out.println("time to accessorize your ice cream with yummy toppings");
@@ -134,28 +155,88 @@ public class UserInterface {
                     Ex: 1,3,5
                     Toppings: Stardust Sprinkles,Moon Cheese,Wizard Bones
                     """);
-
+            //create helper meths
             String toppingChoice = scanner.nextLine();
             String[] toppingChoices = toppingChoice.split(",");
 
-            for (String toppingIndex: toppingChoices) {
-                int index = Integer.parseInt(toppingIndex) -1;
-                if(index > toppings.size() -1 || index < 0)  {
+            for (String toppingIndex : toppingChoices) {
+                int index = Integer.parseInt(toppingIndex) - 1;
+                if (index > toppings.size() - 1 || index < 0) {
                     System.out.println("Invalid flavor choice");
                     validToppings = false;
                 } else {
                     selectedToppings.add(toppings.get(index));
+                    validToppings = true;
                 }
+                iceCream.setToppings(selectedToppings);
             }
         } while (!validToppings);
 
-        System.out.println("""
-                Chosen flavors:
-                """ + iceCream.getToppings());
+        System.out.println(iceCream.getToppings());
 
-        }
+
+        System.out.println("Would you like to add extra toppings for an extra charge");
+
 
     }
+
+    public void signatureOrderProcess() {
+
+        //add some sort of back up loop
+        boolean validChoice = true;
+
+        do {
+            System.out.println("Here are the signature ice creams available. Please choose a signature ice cream:");
+            //change display methods to include flavors, toppings, and description
+            //format
+            weirdIceCreamShop.signatureMenuDisplay();
+
+            ArrayList<IceCream> signatures = weirdIceCreamShop.getSignatureTemplate();
+
+
+            int choice = scanner.nextInt();
+            IceCream template = signatures.get(choice - 1);
+
+            scanner.nextLine();
+
+            if (choice < 1 || choice > signatures.size()) {
+                System.out.println("Invalid choice");
+                validChoice = false;
+            }
+
+
+            //Ask for size
+            IceCreamSize.displaySizeOptions();
+            int sizeChoice = scanner.nextInt();
+            scanner.nextLine();
+            IceCreamSize size = IceCreamSize.toIndex(sizeChoice);
+
+            //prompt user if want to order as is or change order
+
+            System.out.println("How many extra toppings?");
+            int extra = scanner.nextInt();
+            scanner.nextLine();
+
+            IceCream ordered = new IceCream(template, size, extra);
+
+            System.out.println("Your signature order: " + ordered.getName());
+            System.out.println("Total: $" + ordered.totalPrice());
+
+            // insert buffered writer
+        } while (!validChoice);
+    }
+
+
+    public void drinkOrderProcess() {
+
+    }
+
+    public void sideOrderProcess() {
+
+    }
+
+
+}
 
 
 

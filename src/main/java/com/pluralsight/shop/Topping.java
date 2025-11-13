@@ -40,5 +40,9 @@ public class Topping extends MenuItem {
 //        toppings.add(topping);
 //    }
 
-
+//make to string pretty
+    @Override
+    public String toString() {
+        return "Chosen flavors" +  " " + getName();
+    }
 }

@@ -19,5 +19,11 @@ public abstract class MenuItem {
 
     //abstract method to calculate the price
     public abstract double totalPrice();
+
+    //
+
+
 }
+
+
 

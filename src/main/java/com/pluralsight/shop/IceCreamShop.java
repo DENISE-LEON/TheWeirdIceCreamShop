@@ -13,7 +13,6 @@ public class IceCreamShop {
     ArrayList<Topping> toppingMenu = new ArrayList<>();
 
 
-
     public String getName() {
         return name;
     }
@@ -21,12 +20,17 @@ public class IceCreamShop {
     public String getAddress() {
         return address;
     }
-    public ArrayList<String> getFlavorMenu(){
+
+    public ArrayList<String> getFlavorMenu() {
         return this.flavorMenu;
     }
 
     public ArrayList<Topping> getToppingMenu() {
         return this.toppingMenu;
+    }
+
+    public ArrayList<IceCream> getSignatureTemplate() {
+        return this.signatureTemplate;
     }
 
     public IceCreamShop() {
@@ -60,7 +64,7 @@ public class IceCreamShop {
         toppingMenu.add(new Topping("Moon Crystal Shards", ToppingType.MYSTICAL));
         toppingMenu.add(new Topping("Moon Cheese", ToppingType.MYSTICAL));
         toppingMenu.add(new Topping("Baked Founder Titan Pieces", ToppingType.MYSTICAL));
-        toppingMenu.add(new Topping("Wizard Bones",ToppingType.MYSTICAL));
+        toppingMenu.add(new Topping("Wizard Bones", ToppingType.MYSTICAL));
 
         //Weird
         toppingMenu.add(new Topping("Pickle Confetti", ToppingType.WEIRD));
@@ -87,29 +91,42 @@ public class IceCreamShop {
         toppingMenu.add(new Topping("Honey Glaze", ToppingType.DRIZZLE));
 
 
-
-
-
-
-
         //signature ice creams
-       // signatureTemplate.add(new IceCream("Piccolas Cage", IceCreamCup.EDIBLE_GLASS, ))
+        signatureTemplate.add(new IceCream("Piccolas Cage", IceCreamCup.EDIBLE_GLASS, new ArrayList<>(java.util.List.of(findFlavor("Chocolate Fudge"), findFlavor("Pickle Pickle"))),
+                new ArrayList<>(java.util.List.of(findTopping("Moon Cheese"), findTopping("Pickle Confetti"))), "A chaotic combo of chocolate + raspberry with mystical toppings"));
 
+        signatureTemplate.add(new IceCream("Founding Titan Feast", IceCreamCup.WAFFLE, new ArrayList<>(java.util.List.of(findFlavor("Hot Cheeto"), findFlavor("Pickle Pickle"))),
+                new ArrayList<>(java.util.List.of(findTopping("Baked Founder Titan Pieces"), findTopping("Hot Cheeto Dust"))), "Spicy, crunchy, unhinged — a dessert for warriors"));
+
+        signatureTemplate.add(new IceCream("Celestial Matcha", IceCreamCup.PAPER_CUP, new ArrayList<>(java.util.List.of(findFlavor("Matcha Green Tea"), findFlavor("Pistachio"))),
+                new ArrayList<>(java.util.List.of(findTopping("Moon Crystal Shards"), findTopping("Dark Chocolate Drizzle"))), "Earthy matcha lifted with cosmic sweetness"));
+
+        signatureTemplate.add(new IceCream("Forbidden Birthday Cake", IceCreamCup.HAND, new ArrayList<>(java.util.List.of(findFlavor("Birthday Cake"), findFlavor("Blue Cheese"))),
+                new ArrayList<>(java.util.List.of(findTopping("Cotton Candy Floss"), findTopping("Marshmallow Mushrooms"))), "Sweet, funky, chaotic — absolutely NOT FDA approved"));
+
+        signatureTemplate.add(new IceCream("Mango Hex", IceCreamCup.EDIBLE_GLASS, new ArrayList<>(java.util.List.of(findFlavor("Mango Sorbet"), findFlavor("Pomegranate"))),
+                new ArrayList<>(java.util.List.of(findTopping("Mango Cubes"), findTopping("Honey Glaze"))), "Tropical with a spellbinding sour kick"));
 
 
     }
 
-    //method to add flavors by name
-    //MOVE METHOD TO UTIL or UI!!!!!!!
-    public void addFlavorByName(ArrayList<String> names, IceCream iceCream) {
 
-        for(String name: names) {//passing list to make moving method easier later
-            flavorMenu.stream()
-                    .filter(f -> f.equalsIgnoreCase(name)) //only filters the stream (good for displaying purposes)
-                    .findFirst() //extracts the first element that matches so that it could be used in the next chain, to add the flavor
-                    .ifPresent(iceCream.getFlavors()::add);
-        }//what i want to do with the extracted flavor (add it to the array;ist)
+    //matches the flavors in the signature ice cream to the ones in the flavor menu
+    private String findFlavor(String name) {
+        return flavorMenu.stream()
+                .filter(f -> f.equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
     }
+
+    //matches the toppings in the signature ice cream to the ones in the topping menu
+    private Topping findTopping(String name) {
+        return toppingMenu.stream()
+                .filter(t -> t.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .orElse(null);
+    }
+
 
     //display available flavors
     public void flavorMenuDisplay() {
@@ -124,6 +141,14 @@ public class IceCreamShop {
         IntStream.range(0, toppingMenu.size())
                 .forEach(i -> System.out.println((i + 1) + ")" + " " + toppingMenu.get(i).getName()));
     }
+
+    public void signatureMenuDisplay() {
+        System.out.println(" ");
+        IntStream.range(0, signatureTemplate.size())
+                .forEach(i -> System.out.println((i + 1) + ")" + " " + signatureTemplate.get(i).getName()));
+    }
+
+
 }
 
 //turn the drink template into a hash map in order to easily search by name
