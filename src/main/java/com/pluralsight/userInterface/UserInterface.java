@@ -118,19 +118,40 @@ public class UserInterface {
 
         System.out.println("""
         
-        Choosen Flavors: 
+        Chosen Flavors: 
         
         """ + iceCream.getFlavors());
 
         //add toppings
-        System.out.println("time to accessorize your ice cream with yummy topping");
+        System.out.println("time to accessorize your ice cream with yummy toppings");
 
         ArrayList<Topping> selectedToppings = new ArrayList<>();
         boolean validToppings = true;
         do {
+            ArrayList<Topping> toppings = weirdIceCreamShop.getToppingMenu();
+            weirdIceCreamShop.toppingMenuDisplay();
+            System.out.println("""
+                    Ex: 1,3,5
+                    Toppings: Stardust Sprinkles,Moon Cheese,Wizard Bones
+                    """);
 
+            String toppingChoice = scanner.nextLine();
+            String[] toppingChoices = toppingChoice.split(",");
 
-        } while
+            for (String toppingIndex: toppingChoices) {
+                int index = Integer.parseInt(toppingIndex) -1;
+                if(index > toppings.size() -1 || index < 0)  {
+                    System.out.println("Invalid flavor choice");
+                    validToppings = false;
+                } else {
+                    selectedToppings.add(toppings.get(index));
+                }
+            }
+        } while (!validToppings);
+
+        System.out.println("""
+                Chosen flavors:
+                """ + iceCream.getToppings());
 
         }
 

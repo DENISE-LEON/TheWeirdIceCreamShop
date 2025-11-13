@@ -25,6 +25,10 @@ public class IceCreamShop {
         return this.flavorMenu;
     }
 
+    public ArrayList<Topping> getToppingMenu() {
+        return this.toppingMenu;
+    }
+
     public IceCreamShop() {
 
         //drinks.add(new Drink("Water", "water", )
@@ -111,13 +115,14 @@ public class IceCreamShop {
     public void flavorMenuDisplay() {
         System.out.println(" ");
         IntStream.range(0, flavorMenu.size())
-                .forEach(i -> System.out.println((i + 1) + ")" + flavorMenu.get(i)));
+                .forEach(i -> System.out.println((i + 1) + ")" + " " + flavorMenu.get(i)));
     }
 
 
     public void toppingMenuDisplay() {
         System.out.println(" ");
-
+        IntStream.range(0, toppingMenu.size())
+                .forEach(i -> System.out.println((i + 1) + ")" + " " + toppingMenu.get(i).getName()));
     }
 }
 
