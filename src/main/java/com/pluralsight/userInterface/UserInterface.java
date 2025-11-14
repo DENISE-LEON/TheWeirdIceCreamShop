@@ -13,6 +13,7 @@ public class UserInterface {
 
     IceCreamShop weirdIceCreamShop = new IceCreamShop();
     ReceiptWriter receiptWriter = new ReceiptWriter();
+    boolean run = true;
 
     // instead of making a new Order every time in each method
     private Order currentOrder = new Order();
@@ -22,25 +23,39 @@ public class UserInterface {
     }
 
     public void displayMenu() {
+        boolean run = true;
+        do {
 
-        System.out.println("╔══════════════════════════════════════╗");
-        System.out.println("║         ✧ WHAT WOULD YOU LIKE? ✧     ║");
-        System.out.println("╠══════════════════════════════════════╣");
-        System.out.println("║  1) Place an order                   ║");
-        System.out.println("║  0) Exit                             ║");
-        System.out.println("╚══════════════════════════════════════╝");
-        System.out.print("Your choice: ");
-        int menuChoice = scanner.nextInt();
-        scanner.nextLine();
+            System.out.println("╔══════════════════════════════════════╗");
+            System.out.println("║         ✧ WHAT WOULD YOU LIKE? ✧     ║");
+            System.out.println("╠══════════════════════════════════════╣");
+            System.out.println("║  1) Place an order                   ║");
+            System.out.println("║  0) Exit                             ║");
+            System.out.println("╚══════════════════════════════════════╝");
+            System.out.print("Your choice: ");
+            int menuChoice = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (menuChoice) {
-            case 1:
-                orderProcess();
-                break;
-            case 0:
-                System.out.println("Bye bye");
-                System.exit(0);
-        }
+            switch (menuChoice) {
+                case 1:
+                    orderProcess();
+                    break;
+                case 0:
+                    try {
+                        System.out.println("Bye bye");
+                        System.out.println("Exiting");
+                        Thread.sleep(2000);
+                        System.out.println(".");
+                        System.out.println(".");
+                        System.out.println(".");
+                        run = false;
+                    } catch (InterruptedException e) {
+                        // Handle the exception if the thread is interrupted
+                        System.out.println("The delay was interrupted.");
+                    }
+                    break;
+            }
+        } while (run);
 
     }
 
@@ -48,52 +63,55 @@ public class UserInterface {
     //method for placing order
     public void orderProcess() {
         //loop
-        System.out.println("╔══════════════════════════════════════════╗");
-        System.out.println("║          🍨 WHAT WOULD YOU LIKE? 🍨      ║");
-        System.out.println("╠══════════════════════════════════════════╣");
-        System.out.println("║  1) Custom Ice Cream                     ║");
-        System.out.println("║  2) Signature Ice Creams                 ║");
-        System.out.println("║  3) Drinks                               ║");
-        System.out.println("║  4) Side Items                           ║");
-        System.out.println("╠══════════════════════════════════════════╣");
-        System.out.println("║  5) Checkout                             ║");
-        System.out.println("║  6) View Order Summary                   ║");
-        System.out.println("║  0) Cancel Order                         ║");
-        System.out.println("╚══════════════════════════════════════════╝");
-        System.out.print("Your choice: ");
+
+        do {
+            System.out.println("╔══════════════════════════════════════════╗");
+            System.out.println("║          🍨 WHAT WOULD YOU LIKE? 🍨      ║");
+            System.out.println("╠══════════════════════════════════════════╣");
+            System.out.println("║  1) Custom Ice Cream                     ║");
+            System.out.println("║  2) Signature Ice Creams                 ║");
+            System.out.println("║  3) Drinks                               ║");
+            System.out.println("║  4) Side Items                           ║");
+            System.out.println("╠══════════════════════════════════════════╣");
+            System.out.println("║  5) Checkout                             ║");
+            System.out.println("║  6) View Order Summary                   ║");
+            System.out.println("║  0) Cancel Order                         ║");
+            System.out.println("╚══════════════════════════════════════════╝");
+            System.out.print("Your choice: ");
 
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (choice) {
-            case 1:
-                iceCreamOrderProcess();
-                break;
-            case 2:
-                signatureOrderProcess();
-                break;
-            case 3:
-                drinkOrderProcess();
-                break;
-            case 4:
-                sideOrderProcess();
-                break;
-            case 5:
-                checkOutProcess();
-                break;
-            case 6:
-                viewOrderProcess(); //allows the user to view their order and
-                break;
-            case 0:
-                System.out.println("Order canceled.");
-                currentOrder = new Order(); //creates a new order
-                break;
-        }
+            switch (choice) {
+                case 1:
+                    iceCreamOrderProcess();
+                    break;
+                case 2:
+                    signatureOrderProcess();
+                    break;
+                case 3:
+                    drinkOrderProcess();
+                    break;
+                case 4:
+                    sideOrderProcess();
+                    break;
+                case 5:
+                    checkOutProcess();
+                    break;
+                case 6:
+                    viewOrderProcess(); //allows the user to view their order and
+                    break;
+                case 0:
+                    System.out.println("Order canceled.");
+                    break;
+            }
+        } while (run);
     }
 
     //custom order
     public void iceCreamOrderProcess() {
+        do {
         IceCreamCup.displayCupOptions();
         System.out.println("Please chose a cup");
         System.out.println("Your choice:");
@@ -117,7 +135,62 @@ public class UserInterface {
 
         //part 2 of ordering the ice cream
         //display the flavors
+            addFlavorsToCustom(sizeChoice, iceCream);
 
+
+            //add toppings
+            addToppings(iceCream);
+        } while (run);
+
+       
+        viewOrderProcess();
+
+    }
+
+    //helper method to add toppings
+    private void addToppings(IceCream iceCream) {
+        System.out.println("time to accessorize your ice cream with yummy toppings");
+
+        ArrayList<Topping> selectedToppings = new ArrayList<>();
+        boolean validToppings = true;
+
+        ArrayList<Topping> toppings = weirdIceCreamShop.getToppingMenu();
+        weirdIceCreamShop.toppingMenuDisplay();
+        System.out.println("╔══════════ EXAMPLE ══════════╗");
+        System.out.println("║  Ex: 1,3,5                  ║");
+        System.out.println("║  Toppings:                  ║");
+        System.out.println("║     Stardust Sprinkles      ║");
+        System.out.println("║     Moon Cheese             ║");
+        System.out.println("║     Wizard Bones            ║");
+        System.out.println("╚═════════════════════════════╝");
+
+        //create helper meths
+        String toppingChoice = scanner.nextLine();
+        String[] toppingChoices = toppingChoice.split(",");
+
+        for (String toppingIndex : toppingChoices) {
+            int index = Integer.parseInt(toppingIndex) - 1;
+            if (index > toppings.size() - 1 || index < 0) {
+                System.out.println("Invalid flavor choice");
+                validToppings = false;
+            } else {
+                selectedToppings.add(toppings.get(index));
+                validToppings = true;
+            }
+            iceCream.setToppings(selectedToppings);
+
+            System.out.println("༻✧ CHOSEN TOPPINGS ✧༺");
+            System.out.println("-----------------------------------------");
+            System.out.println(iceCream.getToppings());
+            System.out.println("-----------------------------------------");
+            //the ice cream is added to the current order
+            currentOrder.addItem(iceCream);
+            System.out.println("Your ice cream was added to the order:" + iceCream.getDescription());
+        }
+    }
+
+    //helper method to add flavors 
+    private void addFlavorsToCustom(IceCreamSize sizeChoice, IceCream iceCream) {
         //bool used to validate the user input and loop if the input is not good
         //set to false so that the program runs at least once
         boolean validFlavors = false;
@@ -182,50 +255,6 @@ public class UserInterface {
         System.out.println("-----------------------------------------");
         System.out.println(iceCream.getFlavors());
         System.out.println("-----------------------------------------");
-
-
-        //add toppings
-        System.out.println("time to accessorize your ice cream with yummy toppings");
-
-        ArrayList<Topping> selectedToppings = new ArrayList<>();
-        boolean validToppings = true;
-        do {
-            ArrayList<Topping> toppings = weirdIceCreamShop.getToppingMenu();
-            weirdIceCreamShop.toppingMenuDisplay();
-            System.out.println("╔══════════ EXAMPLE ══════════╗");
-            System.out.println("║  Ex: 1,3,5                  ║");
-            System.out.println("║  Toppings:                  ║");
-            System.out.println("║     Stardust Sprinkles      ║");
-            System.out.println("║     Moon Cheese             ║");
-            System.out.println("║     Wizard Bones            ║");
-            System.out.println("╚═════════════════════════════╝");
-
-            //create helper meths
-            String toppingChoice = scanner.nextLine();
-            String[] toppingChoices = toppingChoice.split(",");
-
-            for (String toppingIndex : toppingChoices) {
-                int index = Integer.parseInt(toppingIndex) - 1;
-                if (index > toppings.size() - 1 || index < 0) {
-                    System.out.println("Invalid flavor choice");
-                    validToppings = false;
-                } else {
-                    selectedToppings.add(toppings.get(index));
-                    validToppings = true;
-                }
-                iceCream.setToppings(selectedToppings);
-            }
-        } while (!validToppings);
-
-        System.out.println("༻✧ CHOSEN FLAVORS ✧༺");
-        System.out.println("-----------------------------------------");
-        System.out.println(iceCream.getToppings());
-        System.out.println("-----------------------------------------");
-        //the ice cream is added to the current order
-        currentOrder.addItem(iceCream);
-        System.out.println("Your ice cream was added to the order:" + iceCream.getDescription());
-        viewOrderProcess();
-
     }
 
     public void signatureOrderProcess() {
@@ -353,24 +382,37 @@ public class UserInterface {
 
     public void checkOutProcess() {
 
-        if (currentOrder.getOrderItems().isEmpty()) {
-            System.out.println("Your order is empty. Nothing to checkout.");
-            return;
-        }
+        do {
+            if (currentOrder.getOrderItems().isEmpty()) {
+                System.out.println("Your order is empty. Nothing to checkout.");
+                return;
+            }
 
-        System.out.println("\n༻✧ ORDER SUMMARY ✧༺");
-        currentOrder.getOrderItems().forEach(item ->
-                System.out.println("- " + item.getName() + " | $" + String.format("%.2f", item.totalPrice()))
-        );
-        System.out.println("Total: $" + String.format("%.2f", currentOrder.getTotal()));
+            System.out.println("\n༻✧ ORDER SUMMARY ✧༺");
+            currentOrder.getOrderItems().forEach(item ->
+                    System.out.println("- " + item.getName() + " | $" + String.format("%.2f", item.totalPrice()))
+            );
+            System.out.println("Total: $" + String.format("%.2f", currentOrder.getTotal()));
 
-        //write receipt
-        receiptWriter.recieptWriter(currentOrder);
-        System.out.println("Your receipt has been created. 🧾");
-        System.out.println("Thank you, come again!");
+            //write receipt
+            receiptWriter.recieptWriter(currentOrder);
+            System.out.println("Your receipt has been created. 🧾");
+            System.out.println("Thank you, come again!");
 
-        //reset for next order
-        currentOrder = new Order();
+            //reset for next order
+            currentOrder = new Order();
+
+            System.out.println("Would you like to play another order?(Y/N)");
+            String anotherOrder = scanner.nextLine().trim().toUpperCase();
+
+            switch (anotherOrder) {
+                case "Y":
+                run = false;
+                break;
+                case "N":
+                    System.exit(0);
+            }
+        }while (run);
     }
 
     public void viewOrderProcess() {
