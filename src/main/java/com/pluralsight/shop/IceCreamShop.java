@@ -117,9 +117,9 @@ public class IceCreamShop {
 
 
         //drinks
-        drinkTemplate.add(new Drink("Minty Madness","Mint chocolate chip milkshake",false,true,"Refreshingly chaotic, topped with extra sugar"));
-        drinkTemplate.add(new Drink("Yuzu Pop","Sparkling citrus soda",false,false,"Bright, zesty, absolutely unserious"));
-        drinkTemplate.add(new Drink("Dark Roast Disaster","Cold brew with caramel drizzle",false,false,"Aggressively caffeinated for finals week vibes"));
+        drinkTemplate.add(new Drink("Minty Madness","Mint chocolate chip milkshake","Refreshingly chaotic, topped with extra sugar"));
+        drinkTemplate.add(new Drink("Yuzu Pop","Sparkling citrus soda","Bright, zesty, absolutely unserious"));
+        drinkTemplate.add(new Drink("Dark Roast Disaster","Cold brew with caramel drizzle","Aggressively caffeinated for finals week vibes"));
 
 
     }

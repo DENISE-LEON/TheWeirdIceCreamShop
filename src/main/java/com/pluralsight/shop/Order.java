@@ -6,14 +6,14 @@ import java.util.ArrayList;
 public class Order {
     private String orderID;
     private ArrayList<MenuItem> orderItems;
-    //starts at 1
-    private int startID = 1;
     private LocalDateTime orderTime;
 
-    //generated ID when order is created
+    private static int startID = 1;
+
+    // generates ID when order is created
     public Order() {
-        this.orderID  = String.format("%04d",startID++);
-        this.orderItems = new ArrayList<>(orderItems);
+        this.orderID = String.format("%04d", ++startID);
+        this.orderItems = new ArrayList<>();
         this.orderTime = LocalDateTime.now();
     }
 
@@ -34,9 +34,8 @@ public class Order {
     }
 
     public double getTotal() {
-       return orderItems.stream()
-                .mapToDouble(i -> i.totalPrice())
+        return orderItems.stream()
+                .mapToDouble(MenuItem::totalPrice)
                 .sum();
     }
-
 }
