@@ -74,7 +74,7 @@ public class UserInterface {
             System.out.println("╠══════════════════════════════════════════╣");
             System.out.println("║  5) Checkout                             ║");
             System.out.println("║  6) View Order Summary                   ║");
-            System.out.println("║  0) Cancel Order                         ║");
+            System.out.println("║  0) Exit                       ║");
             System.out.println("╚══════════════════════════════════════════╝");
             System.out.print("Your choice: ");
 
@@ -102,7 +102,7 @@ public class UserInterface {
                     viewOrderProcess(); //allows the user to view their order and
                     break;
                 case 0:
-                    System.out.println("");
+                    System.out.println("Exit");
                     run = false;
                     break;
             }
