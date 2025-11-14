@@ -9,7 +9,6 @@ public class IceCream extends MenuItem {
     private ArrayList<String> flavors;
     //list of flavors and toppings for each order
     private ArrayList<Topping> toppings;
-    private int extraToppings;
     private String iceDescription;
 
 
@@ -25,10 +24,9 @@ public class IceCream extends MenuItem {
 
     //order constructor
     //does not have a description
-    public IceCream(IceCream template, IceCreamSize iceCreamSize, int extraToppings) {
+    public IceCream(IceCream template, IceCreamSize iceCreamSize) {
         super(template.getName());
         this.iceCreamCup = template.iceCreamCup;
-        this.extraToppings = extraToppings;
         this.flavors = new ArrayList<>(template.flavors); //copies the flavors from template
         this.toppings = new ArrayList<>(template.toppings); //copies the toppings for template
         this.iceCreamSize = iceCreamSize;
@@ -85,7 +83,13 @@ public class IceCream extends MenuItem {
 
 
     public String getDescription() {
-        return " " + iceCreamSize.getDisplayName() + " " + getName() + " " + flavors + " " + toppings;
+        return String.format(
+                "%s • %s • Flavors: %s • Toppings: %s",
+                iceCreamSize.getDisplayName(),
+                getName(),
+                String.join(", ", flavors),
+                toppings);
+
     }
 
     //method to calculate the price
@@ -95,7 +99,6 @@ public class IceCream extends MenuItem {
         return toppings.stream()
                 .mapToDouble(t -> toppingPriceForSize(t))
                 .sum()
-                + extraToppingCalc(extraToppings)
                 + iceCreamSize.getPrice()
                 + iceCreamCup.getPrice();
         //add topping total prie
@@ -119,21 +122,6 @@ public class IceCream extends MenuItem {
                 throw new IllegalArgumentException("Unknown size");
         }
 
-    }
-
-    //multiplies the cost for each extra topping based on the size and amount
-    public double extraToppingCalc(int extraToppings) {
-        double price;
-        switch (iceCreamSize) {
-            case CUTTIE_SIZE:
-                return extraToppings * .25;
-            case JUST_RIGHT:
-                return extraToppings * .50;
-            case SIDE_EYE:
-                return extraToppings * .75;
-            default:
-                throw new IllegalArgumentException("Unknown size");
-        }
     }
 
     //method to cal
