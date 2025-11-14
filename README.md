@@ -1,5 +1,5 @@
 # 🌙🍦 The Weird Ice Cream Shop
-### *A chaotic, magical, slightly cursed Java console application*
+### *A magical, slightly cursed Java console application*
 
 Welcome to **The Weird Ice Cream Shop**, a Java-based ordering system where customers can build custom ice creams, order signature creations, drinks, and side items — and get a **printed receipt** generated straight into your `resources` folder.
 
