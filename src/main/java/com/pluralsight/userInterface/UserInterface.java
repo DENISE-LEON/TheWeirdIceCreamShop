@@ -242,7 +242,7 @@ public class UserInterface {
 
             // add signature ice cream to current order
             currentOrder.addItem(sigIceCream);
-            System.out.println("Signature ice cream added to your order");
+            System.out.println("Signature ice cream" + sigIceCream.getDescription() + "added to your order");
 
             validChoice = true;
             //prompt user if want to check out, edit order, or purchse another item, or exit
@@ -282,7 +282,7 @@ public class UserInterface {
 
         // ✨ ADDED: add drink to current order
         currentOrder.addItem(drink);
-        System.out.println("Drink added to your order");
+        System.out.println("Drink" + drink.getDescription() + "added to your order");
 
         viewOrderProcess();
     }
@@ -316,7 +316,7 @@ public class UserInterface {
 
         // ✨ ADDED: add side to current order
         currentOrder.addItem(side);
-        System.out.println("Side item added to your order");
+        System.out.println("Side item:" + side +  "added to your order");
         //insert buffered reader
         viewOrderProcess();
     }

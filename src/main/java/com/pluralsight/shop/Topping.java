@@ -24,7 +24,7 @@ public class Topping extends MenuItem {
 
     @Override
     public String getDescription() {
-        String desc = getName() + toppingType;
+        String desc = getName() + toppingType.getDisplayName();
 
         return desc;
     }

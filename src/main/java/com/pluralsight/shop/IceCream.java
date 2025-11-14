@@ -85,7 +85,7 @@ public class IceCream extends MenuItem {
 
 
     public String getDescription() {
-        return iceCreamSize + getName() + flavors + toppings;
+        return " " + iceCreamSize.getDisplayName() + getName() + flavors + toppings;
     }
 
     //method to calculate the price
