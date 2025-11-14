@@ -8,6 +8,7 @@ public class Order {
     private ArrayList<MenuItem> orderItems;
     private LocalDateTime orderTime;
 
+    //starting number
     private static int startID = 1;
 
     // generates ID when order is created

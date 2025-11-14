@@ -146,26 +146,25 @@ public class IceCreamShop {
     public void flavorMenuDisplay() {
         System.out.println(" ");
         IntStream.range(0, flavorMenu.size())
-                .forEach(i -> System.out.println((i + 1) + ")" + " " + flavorMenu.get(i)));
+                .forEach(i -> System.out.printf("\uD83C\uDF53 %2d) %-30s%n", (i + 1), flavorMenu.get(i)));
     }
-
 
     public void toppingMenuDisplay() {
         System.out.println(" ");
         IntStream.range(0, toppingMenu.size())
-                .forEach(i -> System.out.println((i + 1) + ")" + " " + toppingMenu.get(i).getName()));
+                .forEach(i -> System.out.printf("🍬  %d) %-28s%n", (i + 1), toppingMenu.get(i).getName()));
     }
 
     public void signatureMenuDisplay() {
         System.out.println(" ");
         IntStream.range(0, signatureTemplate.size())
-                .forEach(i -> System.out.println((i + 1) + ")" + " " + signatureTemplate.get(i).getName()));
+                .forEach(i -> System.out.printf("🍨 %2d) %-35s%n", (i + 1), signatureTemplate.get(i).getName()));
     }
 
     public void drinkMenuDisplay() {
         System.out.println(" ");
         IntStream.range(0, drinkTemplate.size())
-                .forEach(i -> System.out.println((i + 1) + ")" + " " + drinkTemplate.get(i).getName()));
+                .forEach(i -> System.out.printf("🧋 %2d) %-30s%n", (i + 1), drinkTemplate.get(i).getName()));
     }
 
 

@@ -22,15 +22,16 @@ public class UserInterface {
     }
 
     public void displayMenu() {
-        //loop
-        System.out.println("What would you like to do");
-        System.out.println("""
-                Your options are:
-                1) Place an order
-                0) Exit
-                """);
+
+        System.out.println("╔══════════════════════════════════════╗");
+        System.out.println("║         ✧ WHAT WOULD YOU LIKE? ✧     ║");
+        System.out.println("╠══════════════════════════════════════╣");
+        System.out.println("║  1) Place an order                   ║");
+        System.out.println("║  0) Exit                             ║");
+        System.out.println("╚══════════════════════════════════════╝");
+        System.out.print("Your choice: ");
         int menuChoice = scanner.nextInt();
-        scanner.nextLine(); // ✨ ADDED: clear the newline
+        scanner.nextLine();
 
         switch (menuChoice) {
             case 1:
@@ -39,7 +40,6 @@ public class UserInterface {
             case 0:
                 System.out.println("Bye bye");
                 System.exit(0);
-                //add a default
         }
 
     }
@@ -48,16 +48,20 @@ public class UserInterface {
     //method for placing order
     public void orderProcess() {
         //loop
-        System.out.println("What would you like?");
-        System.out.println("""
-                1) Order a custom ice cream
-                2) Order a signature ice creams
-                3) Order a drink
-                4) Order side items
-                5) Checkout
-                6) View order summary
-                0) Cancel Order
-                """);
+        System.out.println("╔══════════════════════════════════════════╗");
+        System.out.println("║          🍨 WHAT WOULD YOU LIKE? 🍨      ║");
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.println("║  1) Custom Ice Cream                     ║");
+        System.out.println("║  2) Signature Ice Creams                 ║");
+        System.out.println("║  3) Drinks                               ║");
+        System.out.println("║  4) Side Items                           ║");
+        System.out.println("╠══════════════════════════════════════════╣");
+        System.out.println("║  5) Checkout                             ║");
+        System.out.println("║  6) View Order Summary                   ║");
+        System.out.println("║  0) Cancel Order                         ║");
+        System.out.println("╚══════════════════════════════════════════╝");
+        System.out.print("Your choice: ");
+
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -79,11 +83,11 @@ public class UserInterface {
                 checkOutProcess();
                 break;
             case 6:
-                viewOrderProcess();
+                viewOrderProcess(); //allows the user to view their order and
                 break;
             case 0:
                 System.out.println("Order canceled.");
-                currentOrder = new Order();
+                currentOrder = new Order(); //creates a new order
                 break;
         }
     }
@@ -92,52 +96,68 @@ public class UserInterface {
     public void iceCreamOrderProcess() {
         IceCreamCup.displayCupOptions();
         System.out.println("Please chose a cup");
+        System.out.println("Your choice:");
         int choice = scanner.nextInt();
         scanner.nextLine();
         //matches the user int to the actual cup using the index
         IceCreamCup cupChoice = IceCreamCup.toIndex(choice);
 
         System.out.println("next chose a size");
+
         IceCreamSize.displaySizeOptions();
         int size = scanner.nextInt();
         scanner.nextLine();
+        System.out.println("your choice:");
+        //a bridge between the users int input and the cup choice
         IceCreamSize sizeChoice = IceCreamSize.toIndex(size);
 
+        //new ice cream created that has cup and size. other properties are added later using setters
         IceCream iceCream = new IceCream(sizeChoice, cupChoice);
 
+
+        //part 2 of ordering the ice cream
         //display the flavors
 
+        //bool used to validate the user input and loop if the input is not good
+        //set to false so that the program runs at least once
         boolean validFlavors = false;
+
+        //temp list for the flavors the user chooses
         ArrayList selectedFlavors = new ArrayList<>();
         while (!validFlavors) {
 
 
             //add the flavor to the ice cream
             System.out.println("now it's time to chose flavors");
-            System.out.println("please be aware that the" + " " + sizeChoice.getDisplayName() + " " + "only allows for" + " " + sizeChoice.getAmtOfScoops() + " " + "scoops/flavors");
-            //weirdIceCreamShop.flavorMenuDisplay();
 
+            //notifiy the user of the limit to avoid oopsies
+            System.out.println("please be aware that the" + " " + sizeChoice.getDisplayName() + " " + "only allows for" + " " + sizeChoice.getAmtOfScoops() + " " + "scoops/flavors");
 
             //displaying the flavors to the user to choose from
             ArrayList<String> flavors = weirdIceCreamShop.getFlavorMenu();
-            ArrayList<MenuItem> item = new ArrayList<>();
 
+            //calls a display method inside of the ice cream shop class
             weirdIceCreamShop.flavorMenuDisplay();
 
-            System.out.println("""
-                    
-                    Ex: 1,3,5
-                    Toppings: Raspberry Berry,Strawberry Swirl,Pistachio
-                    """);
+            //pretty formating for the example
+            System.out.println("╔════════ EXAMPLE INPUT ═════════╗");
+            System.out.println("║  Ex: 1,3,5                     ║");
+            System.out.println("║  Picks: Raspberry Berry,       ║");
+            System.out.println("║         Strawberry Swirl,      ║");
+            System.out.println("║         Pistachio              ║");
+            System.out.println("╚════════════════════════════════╝");
+            System.out.println("Your choice:");
 
-
+            //String in order to take in multiple options at once
             String flavorChoice = scanner.nextLine();
 
+            //seperate the inputs using the commas
             String[] choices = flavorChoice.split(",");
 
+            //incase the user tries to pick more flavors than allowed
             if (choices.length > sizeChoice.getAmtOfScoops()) {
                 System.out.println("Please try again...");
-                System.out.println("You've selected more scopps than allowed");
+                System.out.println("You've selected more scoops than allowed");
             } else {
                 // if the length is valid
                 //then we want to make sure the flavors are valid
@@ -146,21 +166,23 @@ public class UserInterface {
                     if (index > flavors.size() - 1 || index < 0) {
                         System.out.println("Sorry invalid flavor choice");
                     } else {
-                        selectedFlavors.add(flavors.get(index));
+                        selectedFlavors.add(flavors.get(index)); //adds to the array list of flavors
                     }
                 }
-                //all flavors have been added to selected flavors arr.
+                //all flavors have been added to selected flavors arraylist
+                //sets flavor list to selected flavors
                 iceCream.setFlavors(selectedFlavors);
+                //exits out of the loop
                 validFlavors = true;
             }
         }
 
 
-        System.out.println("""
-                
-                Chosen Flavors:
-                
-                """ + iceCream.getFlavors());
+        System.out.println("༻✧ CHOSEN FLAVORS ✧༺");
+        System.out.println("-----------------------------------------");
+        System.out.println(iceCream.getFlavors());
+        System.out.println("-----------------------------------------");
+
 
         //add toppings
         System.out.println("time to accessorize your ice cream with yummy toppings");
@@ -170,10 +192,14 @@ public class UserInterface {
         do {
             ArrayList<Topping> toppings = weirdIceCreamShop.getToppingMenu();
             weirdIceCreamShop.toppingMenuDisplay();
-            System.out.println("""
-                    Ex: 1,3,5
-                    Toppings: Stardust Sprinkles,Moon Cheese,Wizard Bones
-                    """);
+            System.out.println("╔══════════ EXAMPLE ══════════╗");
+            System.out.println("║  Ex: 1,3,5                  ║");
+            System.out.println("║  Toppings:                  ║");
+            System.out.println("║     Stardust Sprinkles      ║");
+            System.out.println("║     Moon Cheese             ║");
+            System.out.println("║     Wizard Bones            ║");
+            System.out.println("╚═════════════════════════════╝");
+
             //create helper meths
             String toppingChoice = scanner.nextLine();
             String[] toppingChoices = toppingChoice.split(",");
@@ -191,9 +217,11 @@ public class UserInterface {
             }
         } while (!validToppings);
 
+        System.out.println("༻✧ CHOSEN FLAVORS ✧༺");
+        System.out.println("-----------------------------------------");
         System.out.println(iceCream.getToppings());
-
-
+        System.out.println("-----------------------------------------");
+        //the ice cream is added to the current order
         currentOrder.addItem(iceCream);
         System.out.println("Your ice cream was added to the order:" + iceCream.getDescription());
         viewOrderProcess();
@@ -202,7 +230,6 @@ public class UserInterface {
 
     public void signatureOrderProcess() {
 
-        //add some sort of back up loop
         boolean validChoice = true;
 
         do {
@@ -211,11 +238,14 @@ public class UserInterface {
             //format
             weirdIceCreamShop.signatureMenuDisplay();
 
+            //temp copy of the menu items
             ArrayList<IceCream> signatures = weirdIceCreamShop.getSignatureTemplate();
 
 
             int choice = scanner.nextInt();
             scanner.nextLine();
+
+            //incase user inputs number out of bounds
             if (choice < 1 || choice > signatures.size()) {
                 System.out.println("Invalid choice");
                 validChoice = false;
@@ -314,9 +344,9 @@ public class UserInterface {
 
         System.out.println(side.getDescription());
 
-        // ✨ ADDED: add side to current order
+
         currentOrder.addItem(side);
-        System.out.println("Side item:" + side +  "added to your order");
+        System.out.println("Side item:" + side + "added to your order");
         //insert buffered reader
         viewOrderProcess();
     }
@@ -346,18 +376,41 @@ public class UserInterface {
     public void viewOrderProcess() {
         //show current order content
 
+
         if (currentOrder.getOrderItems().isEmpty()) {
             System.out.println("Your order is currently empty.");
             return;
         }
 
-        System.out.println("\n༻✧ CURRENT ORDER ✧༺");
-        currentOrder.getOrderItems().forEach(item ->
-                System.out.println("- " + item.getName() + " | $" + String.format("%.2f", item.totalPrice()))
-        );
-        System.out.println("Total so far: $" + String.format("%.2f", currentOrder.getTotal()));
+        System.out.println("\n╔══════════ CURRENT ORDER ═══════════╗");
 
-       orderProcess();
+        currentOrder.getOrderItems().forEach(item -> {
+            System.out.printf("║  %-26s $%.2f%n", item.getName(), item.totalPrice());
+        });
+
+        System.out.println("╠════════════════════════════════════╣");
+        System.out.printf("║  Total so far:          $%.2f%n", currentOrder.getTotal());
+        System.out.println("╚════════════════════════════════════╝\n");
+        System.out.println();
+        System.out.println();
+
+        System.out.println("Would you like to:");
+        System.out.println("""
+                1) Continue ordering
+                2) Check out
+                0) Exit
+                """);
+        int viewOrderChoice = scanner.nextInt();
+
+        switch (viewOrderChoice) {
+            case 1:
+                orderProcess();
+                break;
+            case 2:
+                checkOutProcess();
+            case 0:
+                System.exit(0);
+        }
 
     }
 

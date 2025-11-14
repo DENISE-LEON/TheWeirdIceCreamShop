@@ -42,7 +42,7 @@ public class SideItem extends MenuItem {
 
     @Override
     public String getDescription() {
-        String desc = getName() + getQuantity() + getPricePerItem();
+        String desc = getName() + " " + getQuantity() + " " + getPricePerItem();
 
         return desc;
     }

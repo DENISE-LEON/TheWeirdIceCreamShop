@@ -15,6 +15,7 @@ public class ReceiptWriter {
         //  Create file path inside folder
         //time formatter for the reciept name
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
+
         String orderTIme = order.getOrderTime().format(formatter2);
 
         //file path with folder and name

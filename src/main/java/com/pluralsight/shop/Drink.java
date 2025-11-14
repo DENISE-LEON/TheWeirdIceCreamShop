@@ -18,7 +18,7 @@ public class Drink extends MenuItem {
     public Drink(Drink template, DrinkSize drinkSize) {
         super(template.getName());
         this.type = template.type;
-        this.drinkSize = drinkSize;
+        this.drinkSize = drinkSize; //to ask the user for the size
     }
 
     public DrinkSize getDrinkSize() {
