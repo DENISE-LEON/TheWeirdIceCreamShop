@@ -49,9 +49,8 @@ public class Drink extends MenuItem {
 
     @Override
     public String getDescription() {
-        String desc = drinkSize.getDisplayName() + " " + type;
+        return String.format("%s • %s", drinkSize.getDisplayName(), type);
 
-        return desc;
     }
 
     @Override

@@ -42,7 +42,9 @@ public class SideItem extends MenuItem {
 
     @Override
     public String getDescription() {
-        String desc = getName() + " " + getQuantity() + " " + getPricePerItem();
+        String desc = String.format("✧ %d × %s  →  $%.2f each",
+                getQuantity(), getName(), getPricePerItem());
+
 
         return desc;
     }
@@ -52,4 +54,6 @@ public class SideItem extends MenuItem {
     public double totalPrice() {
         return pricePerItem * quantity;
     }
+
+
 }

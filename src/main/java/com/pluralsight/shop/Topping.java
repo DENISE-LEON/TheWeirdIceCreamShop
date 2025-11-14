@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Topping extends MenuItem {
     private ToppingType toppingType;
-   //ArrayList<Topping> toppings;
+    //ArrayList<Topping> toppings;
 
     //constructor
-       public Topping(String name, ToppingType toppingType) {
+    public Topping(String name, ToppingType toppingType) {
         super(name);
         this.toppingType = toppingType;
     }
@@ -40,7 +40,7 @@ public class Topping extends MenuItem {
 //        toppings.add(topping);
 //    }
 
-//make to string pretty
+    //make to string pretty
     @Override
     public String toString() {
         return "Chosen flavors" +  " " + getName();

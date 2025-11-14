@@ -150,9 +150,20 @@ public class IceCreamShop {
     }
 
     public void toppingMenuDisplay() {
-        System.out.println(" ");
+        System.out.println("\n--- TOPPINGS MENU ---\n");
+
         IntStream.range(0, toppingMenu.size())
-                .forEach(i -> System.out.printf("🍬  %d) %-28s%n", (i + 1), toppingMenu.get(i).getName()));
+                .forEach(i -> {
+                    Topping t = toppingMenu.get(i);
+                    double price = t.totalPrice();
+
+                    System.out.printf(
+                            "\uD83C\uDF6C %d) %-25s $%.2f%n",
+                            i + 1,
+                            t.getName(),
+                            price
+                    );
+                });
     }
 
     public void signatureMenuDisplay() {
