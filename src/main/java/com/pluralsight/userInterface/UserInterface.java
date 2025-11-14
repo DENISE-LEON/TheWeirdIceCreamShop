@@ -140,10 +140,19 @@ public class UserInterface {
 
             //add toppings
             addToppings(iceCream);
-        } while (run);
+            //the ice cream is added to the current order
+            currentOrder.addItem(iceCream);
+            System.out.println("Your ice cream was added to the order:" + iceCream.getDescription());
 
-       
-        viewOrderProcess();
+            System.out.println("Would you like to check out?");
+            System.out.println("""
+                    1) Yes i'm ready to check out
+                    2) I would like to add more things to my order
+                    0) Exit
+                    """);
+            String wantsToCheckOut = scanner.nextLine();
+
+        } while (run);
 
     }
 
@@ -183,9 +192,7 @@ public class UserInterface {
             System.out.println("-----------------------------------------");
             System.out.println(iceCream.getToppings());
             System.out.println("-----------------------------------------");
-            //the ice cream is added to the current order
-            currentOrder.addItem(iceCream);
-            System.out.println("Your ice cream was added to the order:" + iceCream.getDescription());
+
         }
     }
 
@@ -259,57 +266,61 @@ public class UserInterface {
 
     public void signatureOrderProcess() {
 
-        boolean validChoice = true;
-
         do {
-            System.out.println("Here are the signature ice creams available. Please choose a signature ice cream:");
-            //change display methods to include flavors, toppings, and description
-            //format
-            weirdIceCreamShop.signatureMenuDisplay();
+            boolean validChoice = true;
 
-            //temp copy of the menu items
-            ArrayList<IceCream> signatures = weirdIceCreamShop.getSignatureTemplate();
+            do {
+                System.out.println("Here are the signature ice creams available. Please choose a signature ice cream:");
+                //change display methods to include flavors, toppings, and description
+                //format
+                weirdIceCreamShop.signatureMenuDisplay();
+
+                //temp copy of the menu items
+                ArrayList<IceCream> signatures = weirdIceCreamShop.getSignatureTemplate();
 
 
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+                int choice = scanner.nextInt();
+                scanner.nextLine();
 
-            //incase user inputs number out of bounds
-            if (choice < 1 || choice > signatures.size()) {
-                System.out.println("Invalid choice");
-                validChoice = false;
-                continue; // go back to the top if invalid
-            }
+                //incase user inputs number out of bounds
+                if (choice < 1 || choice > signatures.size()) {
+                    System.out.println("Invalid choice");
+                    validChoice = false;
+                    continue; // go back to the top if invalid
+                }
 
-            IceCream template = signatures.get(choice - 1);
+                IceCream template = signatures.get(choice - 1);
 
-            //Ask for size
-            IceCreamSize.displaySizeOptions();
-            int sizeChoice = scanner.nextInt();
-            scanner.nextLine();
-            IceCreamSize size = IceCreamSize.toIndex(sizeChoice);
+                //Ask for size
+                IceCreamSize.displaySizeOptions();
 
-            //adds toppings
-            System.out.println("How many extra toppings?");
-            int extra = scanner.nextInt();
-            scanner.nextLine();
+                int sizeChoice = scanner.nextInt();
+                scanner.nextLine();
+                IceCreamSize size = IceCreamSize.toIndex(sizeChoice);
 
-            IceCream sigIceCream = new IceCream(template, size, extra);
+                //adds toppings
+                System.out.println("How many extra toppings?");
+                int extra = scanner.nextInt();
+                scanner.nextLine();
 
-            System.out.println("Your signature order: " + sigIceCream.getDescription());
-            System.out.println("Total: $" + sigIceCream.totalPrice());
+                IceCream sigIceCream = new IceCream(template, size, extra);
 
-            // add signature ice cream to current order
-            currentOrder.addItem(sigIceCream);
-            System.out.println("Signature ice cream" + sigIceCream.getDescription() + "added to your order");
+                System.out.println("Your signature order: " + sigIceCream.getDescription());
+                System.out.println("Total: $" + sigIceCream.totalPrice());
 
-            validChoice = true;
-            //prompt user if want to check out, edit order, or purchse another item, or exit
+                // add signature ice cream to current order
+                currentOrder.addItem(sigIceCream);
+                System.out.println("Signature ice cream" + sigIceCream.getDescription() + "added to your order");
 
-        } while (!validChoice);
+                validChoice = true;
+                //prompt user if want to check out, edit order, or purchse another item, or exit
 
-        //insert order summary
-        viewOrderProcess();
+            } while (!validChoice);
+            while () ;
+
+            //insert order summary
+            viewOrderProcess();
+        }
     }
 
 
@@ -431,7 +442,7 @@ public class UserInterface {
         });
 
         System.out.println("╠════════════════════════════════════╣");
-        System.out.printf("║  Total so far:          $%.2f%n", currentOrder.getTotal());
+        System.out.printf(" ║ Total so far:          $%.2f%n", currentOrder.getTotal());
         System.out.println("╚════════════════════════════════════╝\n");
         System.out.println();
         System.out.println();
@@ -443,6 +454,7 @@ public class UserInterface {
                 0) Exit
                 """);
         int viewOrderChoice = scanner.nextInt();
+        scanner.nextLine();
 
         switch (viewOrderChoice) {
             case 1:
