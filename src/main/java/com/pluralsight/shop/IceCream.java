@@ -46,14 +46,14 @@ public class IceCream extends MenuItem {
     }
 
     //remove flavors anfd toppings
-    public IceCream(IceCream template, IceCreamCup iceCreamCup,IceCreamSize iceCreamSize, ArrayList<Topping> toppings, int extraToppings) {
-        super(template.getName());
-        this.iceCreamCup = iceCreamCup;
-        this.iceCreamSize = iceCreamSize;
-        this.flavors = new ArrayList<>(template.flavors);
-        this.toppings = new ArrayList<>(toppings);
-        this.extraToppings = extraToppings;
-    }
+//    public IceCream(IceCream template, IceCreamCup iceCreamCup,IceCreamSize iceCreamSize, ArrayList<Topping> toppings, int extraToppings) {
+//        super(template.getName());
+//        this.iceCreamCup = iceCreamCup;
+//        this.iceCreamSize = iceCreamSize;
+//        this.flavors = new ArrayList<>(template.flavors);
+//        this.toppings = new ArrayList<>(toppings);
+//        this.extraToppings = extraToppings;
+//    }
 
     public IceCreamSize getIceCreamSize() {
         return iceCreamSize;

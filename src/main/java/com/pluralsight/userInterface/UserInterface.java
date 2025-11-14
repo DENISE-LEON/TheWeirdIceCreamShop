@@ -68,7 +68,12 @@ public class UserInterface {
             case 4:
                 sideOrderProcess();
                 break;
-            //add a defualt
+            case 5:
+                checkOutProcess();
+            case 6:
+                viewOrderProcess();
+            case 0:
+                System.exit(0);
 
         }
     }
